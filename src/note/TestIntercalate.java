@@ -15,12 +15,22 @@ public class TestIntercalate {
                 new Note("Ana", 10)
         };
 
-        Note[] notesSorted = intercalate(notes, 1,4, notes.length);
-
+        Note[] notesSorted = mergeSort(notes, 0, notes.length);
 
         for (Note currentNote: notesSorted) {
             System.out.println(currentNote.getStudent() + " - " + currentNote.getValue());
         }
+    }
+
+    private static Note[] mergeSort(Note[] notes, int start, int end) {
+        int quantity = end - start;
+        if (quantity > 1) {
+            int middle = (end + start) / 2;
+            mergeSort(notes, start, middle);
+            mergeSort(notes, middle, end);
+            intercalate(notes, start, middle, end);
+        }
+        return notes;
     }
 
     private static Note[] intercalate(Note[] notes, int start, int middle, int end) {
